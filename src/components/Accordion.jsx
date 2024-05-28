@@ -4,7 +4,7 @@ export default function Accordion({ data }) {
   return (
     <div className="accordion">
       {data.map((el, i) => (
-        <AccordionItem title={el.title} text={el.text} num={i} />
+        <AccordionItem key={i} title={el.title} text={el.text} num={i} />
       ))}
     </div>
   );
