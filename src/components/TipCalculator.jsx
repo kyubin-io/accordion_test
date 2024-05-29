@@ -29,7 +29,7 @@ export default function TipCalculator() {
       {bill > 0 && (
         <>
           <Output bill={bill} tip={tip} />
-          <Reset onReset={handleReset} />{" "}
+          <Reset onReset={handleReset} />
         </>
       )}
     </>
