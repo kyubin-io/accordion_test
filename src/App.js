@@ -1,4 +1,5 @@
 import Accordion from "./components/Accordion";
+import TipCalculator from "./components/TipCalculator";
 import "./styles.css";
 
 const faqs = [
@@ -19,7 +20,8 @@ const faqs = [
 function App() {
   return (
     <div>
-      <Accordion data={faqs} />
+      {/* <Accordion data={faqs} /> */}
+      <TipCalculator />
     </div>
   );
 }
