@@ -1,45 +1,37 @@
 import React, { useState } from "react";
-import Service from "./Service";
+import BillIInput from "./BillIInput";
+import SelectPercentage from "./SelectPercentage";
+import Output from "./Output";
+import Reset from "./Reset";
 
 export default function TipCalculator() {
-  const [bill, setBill] = useState(0);
-  const [meService, setMeService] = useState(0);
-  const [freService, setFreService] = useState(0);
+  const [bill, setBill] = useState("");
+  const [percentage1, setPercentage1] = useState(0);
+  const [percentage2, setPercentage2] = useState(0);
 
-  let myTip = Number((bill * meService) / 100);
-  let freTip = Number((bill * freService) / 100);
+  const tip = (bill * (percentage1 + percentage2)) / 2 / 100;
 
   function handleReset() {
-    setBill(0);
-    setMeService(null);
-    setFreService(null);
+    setBill("");
+    setPercentage1(0);
+    setPercentage2(0);
   }
 
   return (
     <>
-      <ul>
-        <li>
-          How much was the bill?
-          <input
-            type="number"
-            value={bill}
-            onChange={(e) => setBill(Number(e.target.value))}
-          />
-        </li>
-        <li>
-          How did you like th service?
-          <Service onHandle={setMeService} />
-        </li>
-        <li>
-          How did your friend like the service?
-          <Service onHandle={setFreService} />
-        </li>
-      </ul>
-      <p>
-        `You pay ${bill + myTip + freTip} (${bill} + ${myTip + freTip} tip)`
-      </p>
-
-      <button onClick={handleReset}>Reset</button>
+      <BillIInput bill={bill} onSetBill={setBill} />
+      <SelectPercentage percentage={percentage1} onSelect={setPercentage1}>
+        How did you like the service?
+      </SelectPercentage>
+      <SelectPercentage percentage={percentage2} onSelect={setPercentage2}>
+        How did your friend like the service?
+      </SelectPercentage>
+      {bill > 0 && (
+        <>
+          <Output bill={bill} tip={tip} />
+          <Reset onReset={handleReset} />{" "}
+        </>
+      )}
     </>
   );
 }
